@@ -5,7 +5,7 @@ from torch.utils.data import DataLoader
 from data.pascal import DatasetPASCAL
 from data.coco import DatasetCOCO
 from data.fss import DatasetFSS
-
+from data.defect import DatasetVISION
 
 class FSSDataset:
 
@@ -16,6 +16,7 @@ class FSSDataset:
             'pascal': DatasetPASCAL,
             'coco': DatasetCOCO,
             'fss': DatasetFSS,
+            'defect' : DatasetVISION
         }
 
         cls.img_mean = [0.485, 0.456, 0.406]
@@ -31,8 +32,8 @@ class FSSDataset:
     def build_dataloader(cls, benchmark, bsz, nworker, fold, split, shot=1):
         # Force randomness during training for diverse episode combinations
         # Freeze randomness during testing for reproducibility
-        shuffle = split == 'trn'
-        nworker = nworker if split == 'trn' else 0
+        shuffle = split == 'train'
+        nworker = nworker if split == 'train' else 0
 
         dataset = cls.datasets[benchmark](cls.datapath, fold=fold, transform=cls.transform, split=split, shot=shot, use_original_imgsize=cls.use_original_imgsize)
         dataloader = DataLoader(dataset, batch_size=bsz, shuffle=shuffle, num_workers=nworker)

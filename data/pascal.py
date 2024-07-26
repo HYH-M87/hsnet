@@ -11,7 +11,7 @@ import numpy as np
 class DatasetPASCAL(Dataset):
     def __init__(self, datapath, fold, transform, split, shot, use_original_imgsize):
         self.split = 'val' if split in ['val', 'test'] else 'trn'
-        self.fold = fold
+        self.fold = fold # int {0，1，2，3}
         self.nfolds = 4
         self.nclass = 20
         self.benchmark = 'pascal'
@@ -105,8 +105,8 @@ class DatasetPASCAL(Dataset):
         return query_name, support_names, class_sample
 
     def build_class_ids(self):
-        nclass_trn = self.nclass // self.nfolds
-        class_ids_val = [self.fold * nclass_trn + i for i in range(nclass_trn)]
+        nclass_trn = self.nclass // self.nfolds   # int = 5
+        class_ids_val = [self.fold * nclass_trn + i for i in range(nclass_trn)]  # for fold 0 : [0,1,2,3,4]
         class_ids_trn = [x for x in range(self.nclass) if x not in class_ids_val]
 
         if self.split == 'trn':
