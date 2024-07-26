@@ -52,7 +52,7 @@ if __name__ == '__main__':
     # Arguments parsing
     parser = argparse.ArgumentParser(description='Hypercorrelation Squeeze Pytorch Implementation')
     parser.add_argument('--datapath', type=str, default='../Datasets_HSN')
-    parser.add_argument('--benchmark', type=str, default='pascal', choices=['pascal', 'coco', 'fss'])
+    parser.add_argument('--benchmark', type=str, default='pascal', choices=['pascal', 'coco', 'fss', 'defect'])
     parser.add_argument('--logpath', type=str, default='')
     parser.add_argument('--bsz', type=int, default=20)
     parser.add_argument('--lr', type=float, default=1e-3)
@@ -79,8 +79,8 @@ if __name__ == '__main__':
 
     # Dataset initialization
     FSSDataset.initialize(img_size=400, datapath=args.datapath, use_original_imgsize=False)
-    dataloader_trn = FSSDataset.build_dataloader(args.benchmark, args.bsz, args.nworker, args.fold, 'trn')
-    dataloader_val = FSSDataset.build_dataloader(args.benchmark, args.bsz, args.nworker, args.fold, 'val')
+    dataloader_trn = FSSDataset.build_dataloader(args.benchmark, args.bsz, args.nworker, args.fold, 'train')
+    dataloader_val = FSSDataset.build_dataloader(args.benchmark, args.bsz, args.nworker, args.fold, 'test')
 
     # Train HSNet
     best_val_miou = float('-inf')
