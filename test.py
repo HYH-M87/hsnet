@@ -51,15 +51,15 @@ if __name__ == '__main__':
 
     # Arguments parsing
     parser = argparse.ArgumentParser(description='Hypercorrelation Squeeze Pytorch Implementation')
-    parser.add_argument('--datapath', type=str, default='../Datasets_HSN')
-    parser.add_argument('--benchmark', type=str, default='pascal', choices=['pascal', 'coco', 'fss'])
+    parser.add_argument('--datapath', type=str, default='../data')
+    parser.add_argument('--benchmark', type=str, default='defect', choices=['pascal', 'coco', 'fss', 'defect'])
     parser.add_argument('--logpath', type=str, default='')
     parser.add_argument('--bsz', type=int, default=1)
     parser.add_argument('--nworker', type=int, default=0)
     parser.add_argument('--load', type=str, default='')
     parser.add_argument('--fold', type=int, default=0, choices=[0, 1, 2, 3])
     parser.add_argument('--nshot', type=int, default=1)
-    parser.add_argument('--backbone', type=str, default='resnet101', choices=['vgg16', 'resnet50', 'resnet101'])
+    parser.add_argument('--backbone', type=str, default='resnet50', choices=['vgg16', 'resnet50', 'resnet101'])
     parser.add_argument('--visualize', action='store_true')
     parser.add_argument('--use_original_imgsize', action='store_true')
     args = parser.parse_args()

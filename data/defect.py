@@ -28,7 +28,7 @@ class DatasetVISION(Dataset):
         self.img_metadata = self.build_img_metadata()
 
     def __len__(self):
-        return len(self.img_metadata) if self.split == 'trn' else 1000
+        return len(self.img_metadata)
 
     def __getitem__(self, idx):
         idx %= len(self.img_metadata)  # for testing, as n_images < 1000
@@ -109,7 +109,11 @@ class DatasetVISION(Dataset):
         metadata = os.path.join('data/splits/defect/%s.txt' % (self.split))
         with open(metadata, 'r') as f:
             metadata = f.read().split('\n')[:-1]
-        img_metadata = [[data.split()[0], data.split()[1], int(data.split()[2]), data.split()[3]] for data in metadata]
+        img_metadata=[]
+        for data in metadata:
+            if data.split()[3]=="p":
+
+                img_metadata.append([data.split()[0], data.split()[1], int(data.split()[2]), data.split()[3]])
 
         print('Total (%s) images are : %d' % (self.split, len(img_metadata)))
 

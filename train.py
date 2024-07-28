@@ -51,12 +51,12 @@ if __name__ == '__main__':
 
     # Arguments parsing
     parser = argparse.ArgumentParser(description='Hypercorrelation Squeeze Pytorch Implementation')
-    parser.add_argument('--datapath', type=str, default='../Datasets_HSN')
-    parser.add_argument('--benchmark', type=str, default='pascal', choices=['pascal', 'coco', 'fss', 'defect'])
-    parser.add_argument('--logpath', type=str, default='')
-    parser.add_argument('--bsz', type=int, default=20)
+    parser.add_argument('--datapath', type=str, default='../data')
+    parser.add_argument('--benchmark', type=str, default='defect', choices=['pascal', 'coco', 'fss', 'defect'])
+    parser.add_argument('--logpath', type=str, default='res101')
+    parser.add_argument('--bsz', type=int, default=4)
     parser.add_argument('--lr', type=float, default=1e-3)
-    parser.add_argument('--niter', type=int, default=2000)
+    parser.add_argument('--niter', type=int, default=150)
     parser.add_argument('--nworker', type=int, default=8)
     parser.add_argument('--fold', type=int, default=0, choices=[0, 1, 2, 3])
     parser.add_argument('--backbone', type=str, default='resnet101', choices=['vgg16', 'resnet50', 'resnet101'])
